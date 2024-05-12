@@ -1,0 +1,42 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+All Appointments
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <h2 class="text-center">All Appointments</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Patient Name</th>
+                    <th>Doctor and Department</th>
+                    <th>Contact info</th>
+                    <th>Appointment Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ appointment.patient.user.first_name }} {{ appointment.patient.user.last_name }}</td>
+                        <td>Dr.{{ appointment.doctor.user.first_name }} {{ appointment.doctor.user.last_name }} ({{ appointment.doctor.department.name }})</td>
+                        <td>
+                            <li>{{ appointment.patient.phone }}</li>
+                            <li>{{ appointment.patient.user.email }}</li>
+                        </td>
+                        <td>{{ appointment.appointment_date }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No appointments</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

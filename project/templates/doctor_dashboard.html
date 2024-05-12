@@ -1,0 +1,27 @@
+{% extends 'base3.html' %}
+
+{% block title %}
+Dr.{{user.first_name}}'s dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container text-center mt-5">
+    <div class="display-4">Welcome Dr. {{user.first_name}} </div>
+    <br>
+    <hr>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3>Click to see upcoming appointments</h3>
+            <a href="{% url 'upcomings' %}" class="btn btn-info">Click here</a>
+        </div>
+    </div>
+</div>
+
+
+
+<br> <br><br>
+ 
+
+
+{% endblock %}

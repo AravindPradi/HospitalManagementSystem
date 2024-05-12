@@ -1,0 +1,26 @@
+{% extends 'base1.html' %} 
+
+{% block title %}
+Register as
+{% endblock %}
+
+{% block content %}
+
+<div class="container text-center mt-5">
+    <div class="display-4">Select the user type you want to register..</div><br>
+    <p>Book The Doc, an easy platform to keep track of your appointments</p>
+    <hr>
+    <br>
+    <div class="my-3 mx-4">
+        <a href="{% url 'patient_register' %}" class="btn btn-info">Patient</a>
+        <a href="{% url 'doc_register' %}" class="btn btn-primary">Doctor</a>
+        <a href="{% url 'custom_login' %}" class="btn btn-success">Admin</a>
+    </div>
+</div>
+
+
+
+{% include 'footer.html' %}
+{% endblock %}
+
+

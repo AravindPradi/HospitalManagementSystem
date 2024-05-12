@@ -1,0 +1,21 @@
+{% extends 'base5.html' %} 
+
+{% block title %}
+Patient Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container mt-5 text-center ">
+    <h1>Welcome {{user.first_name}}</h1>
+
+    <br>
+    <a href="{% url 'p_appointment' %}" class="btn btn-outline-info">Take an appointment now</a>
+</div>
+
+
+
+
+
+{% endblock %}

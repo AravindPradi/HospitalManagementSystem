@@ -1,0 +1,31 @@
+{% extends 'base2.html' %}
+
+
+{% block title %}
+Delete {{Doctor.name}}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<div class="container mt-lg-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card text-center shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Are you sure you want to delete {{value.name}}?</h5>
+                    <form action="{% url 'doc_delete' data.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-danger" value="Yes">
+                        <a href="{% url 'doc_details' %}" class="btn btn-secondary">No</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

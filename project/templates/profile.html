@@ -1,0 +1,54 @@
+{% extends 'base3.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border rounded shadow-lg">
+                {% if image_url %}
+                    <img src="{{ image_url }}" alt="Profile Image" style="width: 150px;height: 200px;margin-left: 10px;margin-top: 10px;border-radius: 10px;" class="card-img-top shadow-lg">
+                {% else %}
+                    <img src="" alt="No image found for user">
+                {% endif %}
+                <div class="card-body">
+                    <div class="card-title">
+                        <h2>{{ doctor.user.first_name }} {{ doctor.user.last_name }}</h2>
+                    </div>
+                    <p><b>Username:</b> {{ doctor.user.username }}</p>
+                    <p><b>Email:</b> {{ user.email }}</p>
+                    {% if doctor %}
+                        <p><b>Department:</b> {{ department.name }}</p>
+                    {% endif %}
+                </div>
+                <div class="my-3 ml-3">
+                    <a href="{% url 'update_profile' %}" class="btn btn-warning shadow-lg">Update</a>
+
+                    <a href="{% url 'doctor_dashboard' %}" class="btn btn-secondary shadow-lg">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% for message in messages %}
+<div class="container w-50 text-center">
+    <div class="alert alert-success fade-out">{{ message }}</div>
+</div>
+{% endfor %}
+
+<script>
+    var alerts = document.querySelectorAll('.fade-out');
+    var fadeOutTime = 3000;
+    alerts.forEach(function(alert) {
+        setTimeout(function() {
+            alert.classList.add('fade');
+            alert.addEventListener('transitionend', function() {
+                alert.parentNode.removeChild(alert);
+            });
+        }, fadeOutTime);
+    });
+</script>
+
+{% endblock %}

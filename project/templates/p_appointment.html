@@ -1,0 +1,106 @@
+{% extends 'base5.html' %}
+
+{% block title %}
+Appointment 
+{% endblock %}
+
+{% block content %}
+
+<div class="container my-3 py-3 shadow-lg">
+    <h3 class="mb-3 text-center">Appointment Form</h3>
+ 
+    <b>Patient ID: {{ request.user.patient.patient_id }}</b>
+    <form action="{% url 'p_appointment' %}" method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input type="text" name="fname" placeholder="First name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="lname" placeholder="Last name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="phone" placeholder="Phone" value="+91" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="dis" placeholder="Disease" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <select name="department" id="department" class="form-control" required>
+                <option value="" selected disabled>Select Department</option>
+                {% for department in departments %}
+                <option value="{{ department.id }}">{{ department.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <select name="doctor" id="doctor" class="form-control" required>
+                <option value="">Select Doctor</option>
+                
+                {% for doctor in doctors %}
+                    <option value="{{ doctor.id }}" data-department="{{ doctor.department.id }}">Dr.{{ doctor.user.first_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="date">Appointment Date</label>
+            <input type="date" id="date" name="date" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+{% for message in messages %}
+    <div class="container w-50 text-center">
+        <div class="alert alert-success fade-out">{{ message }}</div>
+    </div>
+{% endfor %}
+    
+    <script>
+        var alerts = document.querySelectorAll('.fade-out');
+        var fadeOutTime = 6000;
+        alerts.forEach(function(alert) {
+            setTimeout(function() {
+                alert.classList.add('fade');
+                alert.addEventListener('transitionend', function() {
+                    alert.parentNode.removeChild(alert);
+                });
+            }, fadeOutTime);
+        });
+    </script>
+
+
+
+<script>
+
+document.getElementById('department').addEventListener('change', function() {
+        var departmentId = this.value;
+        var doctorSelect = document.getElementById('doctor');
+        var doctorOptions = doctorSelect.querySelectorAll('option');
+        
+        doctorOptions.forEach(function(option) {
+            var departmentIdOption = option.getAttribute('data-department');
+            if (!departmentId || departmentIdOption === departmentId) {
+                option.style.display = 'block';
+            } else {
+                option.style.display = 'none';
+            }
+        });
+    });
+
+
+    
+$(function () {
+    $("#datepicker").datepicker();
+});
+</script>
+
+{% endblock %}

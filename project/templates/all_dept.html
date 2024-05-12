@@ -1,0 +1,25 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+All Departments
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h3 class="text-center">Our Departments</h3>
+    <div class="row">
+        {% for department in data %}
+        <div class="col col-12 text-center text-light">
+            <div class="card my-3 bg-info">
+                <div class="card-body">
+                    <h4 class="card-title">{{ department.name }}</h4>
+                    <p class="card-text">{{ department.desc }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

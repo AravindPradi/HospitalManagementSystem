@@ -1,0 +1,52 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+
+Update Doctor Details
+
+{% endblock %}
+
+ {% block content %}
+
+ <div class="container my-3 py-3 shadow-lg">
+    <h3 class="mb-3 text-center">Doctor Update</h3>
+    <form action="{% url 'doc_update' data.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input type="text" name="fname" placeholder="First name" value="{{data.user.first_name}}" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="lname" placeholder="Last name" value="{{data.user.last_name}}" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <input type="text" name="uname" placeholder="Username" value="{{data.user.username}}" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Email" value="{{data.user.email}}" class="form-control" required>
+        </div>
+
+
+        <div class="form-group">
+            <select name="department" class="form-control">
+                <option value="" selected disabled>Select Department</option>
+                {% for department in dept %}
+            <option value="{{ department.id }}" {% if department.id == data.department.id %} selected {% endif %}>{{ department.name }}</option>
+            {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Upload Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" class="form-control-file" >
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+ 
+ {% endblock %}

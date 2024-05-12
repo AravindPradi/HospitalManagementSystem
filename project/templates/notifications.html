@@ -1,0 +1,25 @@
+{% extends 'base3.html' %}
+
+{% block title %}
+Notifications
+{% endblock %}
+
+{% block content %}
+
+<div class="text-center mb-4 mt-5">
+    <h3>Notifications</h3>
+</div>
+
+{% for notification in request.user.notifications.all %}
+<div class="container w-50 text-center">
+    <div class="alert {% if notification.read %}alert-secondary{% else %}alert-info{% endif %}">
+        {{ notification.message }}
+        <form action="{% url 'delete_notification' notification.id %}" method="post" style="display: inline; margin-left: 15px;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

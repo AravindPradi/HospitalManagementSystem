@@ -1,0 +1,44 @@
+{% extends 'base3.html' %}
+
+{% block title %}
+Upcoming Appointments
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Upcoming Appointments</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>No</th>
+                    <th>Patient UID</th>
+                    <th>Patient Name</th>
+                    <th>Appointment Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in upcoming_appointments %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{appointment.patient.patient_id}}</td>
+                    <td>{{ appointment.patient.user.get_full_name }}</td>
+                    <td>{{ appointment.appointment_date }}</td>
+                    <td>
+                        <form action="{% url 'appointment_done' appointment.id %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success">Done</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No upcoming appointments</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base2.html' %}
+
+{% block title %}
+Admin Panel 
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5 text-center">
+    <div class="display-4"> Welcome to Admin Dashboard</div>
+    <br>
+    <b>Manage your website here</b>
+    <br>
+    <hr>
+    <a href="{% url 'all_dept' %}" class="btn btn-outline-danger">Departments</a>
+    <a href="{% url 'doc_details' %}" class="btn btn-outline-warning">Doctors</a>
+    <a href="{% url 'admin_appointments' %} " class="btn btn-outline-info">Appointments</a>
+</div>
+
+
+
+{% endblock %}
